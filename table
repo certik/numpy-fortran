@@ -3,14 +3,20 @@ Fortran
 
 ----
 
-from numpy import array, size
+from numpy import array, size, min, max, sum
 a = array([1, 2, 3])
 print size(a)
+print max(a)
+print min(a)
+print sum(a)
 
 
 real(dp) :: a(3)
 a = [1, 2, 3]
 print *, size(a)
+print *, maxval(a)
+print *, minval(a)
+print *, sum(a)
 
 ----
 
@@ -37,3 +43,21 @@ print *, minval(a)
 print *, maxval(a)
 
 ----
+
+where ( evalues < ef - fdtol*kbt)
+   eweights = 1._dp
+elsewhere( evalues > ef + fdtol*kbt)
+   eweights = 0._dp
+elsewhere
+   eweights = 1._dp/(exp((evalues-ef)/kbt) + 1._dp)
+end where
+
+----
+
+idos = sum(matmul(eweights,kweights))
+
+dot_product
+
+----
+
+logical arrays

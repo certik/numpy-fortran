@@ -61,3 +61,13 @@ dot_product
 ----
 
 logical arrays
+
+----
+
+from numpy import array, shape
+x = array([[1, 6], [2, 7], [3, 8], [4, 9], [5, 10]])
+print shape(x)
+
+integer :: x(5, 2)
+x = reshape([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], shape(x))
+print *, shape(x)

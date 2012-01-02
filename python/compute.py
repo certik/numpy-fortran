@@ -1,13 +1,11 @@
 def init():
     return {}
 
-def register(d, func, data):
+def register(d, func):
     d["func"] = func
-    d["data"] = data
 
-def run(d, in_conditions, dt, nsteps):
+def run(d, in_conditions, dt, nsteps, data):
     func = d["func"]
-    data = d["data"]
     x, y = in_conditions
     t = 0
     for n in range(nsteps):

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+set -e
+gcc -c a.c -o a.o
+gcc -c compute.c -o compute.o
+gcc -o a a.o compute.o

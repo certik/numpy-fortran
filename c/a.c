@@ -21,10 +21,10 @@ void derivs(double x, double y, double *dx, double *dy, void *data)
 int main()
 {
     eq d;
-    init(d);
-    register_func(d, derivs);
-    run(d, 0, 1, 0.1, 10, "eq1");
+    init(&d);
+    register_func(&d, &derivs);
+    run(&d, 0, 1, 0.1, 10, "eq1");
     printf("\n");
-    run(d, 0, 1, 0.1, 10, "eq2");
+    run(&d, 0, 1, 0.1, 10, "eq2");
     return 0;
 }

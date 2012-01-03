@@ -10,7 +10,7 @@ def run(d, in_conditions, dt, nsteps, data):
     t = 0
     for n in range(nsteps):
         dx, dy = func([x, y], data)
-        print x, y
+        print "%.6f %.6f" % (x, y)
         x += dx * dt
         y += dy * dt
         t += dt

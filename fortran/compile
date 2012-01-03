@@ -1,0 +1,7 @@
+#! /bin/bash
+
+set -e
+FFLAGS="-Wall -Wextra -Wimplicit-interface -fPIC -Werror -fmax-errors=1 -g -fbounds-check -fcheck-array-temporaries -fbacktrace"
+gfortran $FFLAGS -c compute.f90 -o compute.o
+gfortran $FFLAGS -c a.f90 -o a.o
+gfortran $FFLAGS -o a a.o compute.o

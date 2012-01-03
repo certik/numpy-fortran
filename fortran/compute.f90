@@ -2,7 +2,7 @@ module compute
 use types, only: dp
 implicit none
 private
-public init, register_func, run, dp
+public init, register_func, run, eq
 
 abstract interface
     function derivs(x) result(y)
@@ -26,7 +26,7 @@ end subroutine
 
 subroutine register_func(d, func)
 type(eq), intent(inout) :: d
-procedure(derivs), pointer, intent(in) :: func
+procedure(derivs) :: func
 d%func => func
 end subroutine
 
@@ -44,7 +44,7 @@ x = x0
 t = 0
 do i = 1, n_steps
     dx = d%func(x)
-    print *, x
+    print "(f10.6, f10.6)", x
     x = x + dx * dt
     t = t + dt
 end do

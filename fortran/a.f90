@@ -4,22 +4,33 @@ use compute, only: init, register_func, run, eq
 
 type(eq) :: d
 character(len=1), allocatable :: data(:)
-integer :: l
 
 call init(d)
 call register_func(d, derivs)
-l = size(transfer(1, data))
-allocate(data(l))
-data = transfer(1, data)
+call type2data(1, data)
 call run(d, [0.0_dp, 1.0_dp], 0.1_dp, 10, data)
 print *
-deallocate(data)
-l = size(transfer(2, data))
-allocate(data(l))
-data = transfer(2, data)
+call type2data(2, data)
 call run(d, [0.0_dp, 1.0_dp], 0.1_dp, 10, data)
 
 contains
+
+! Here the "type" is just an integer, but we can use any type
+subroutine type2data(i, data)
+integer, intent(in) :: i
+character(len=1), allocatable, intent(out) :: data(:)
+integer :: l
+l = size(transfer(i, data))
+allocate(data(l))
+data = transfer(i, data)
+end subroutine
+
+subroutine data2type(data, i)
+character(len=1), intent(in) :: data(:)
+integer, intent(out) :: i
+i = transfer(data, i)
+end subroutine
+
 
 function derivs(x, data) result(y)
 use types, only: dp
@@ -27,7 +38,7 @@ real(dp), intent(in) :: x(2)
 character(len=1), intent(in) :: data(:)
 real(dp) :: y(2)
 integer :: eq_type
-eq_type = transfer(data, eq_type)
+call data2type(data, eq_type)
 if (eq_type == 1) then
     y(1) = -x(2)
     y(2) = x(1)

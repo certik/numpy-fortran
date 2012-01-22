@@ -21,7 +21,7 @@ void print_material_parameters(eq d)
 {
     // Access the context:
     my_data *ctx;
-    get_context(d, (void **)(&ctx));
+    get_context(d, &ctx);
     printf("Material parameters: %f %f %f %f\n", ctx->a11, ctx->a12,
             ctx->a21, ctx->a22);
 }

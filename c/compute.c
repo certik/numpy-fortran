@@ -32,7 +32,7 @@ void run(eq d, double x0, double y0, double dt, double n_steps)
     y = y0;
     t = 0;
     for (i=0; i < n_steps; i++) {
-        (*(d->func))(x, y, &dx, &dy, d->data);
+        d->func(x, y, &dx, &dy, d->data);
         printf("%f %f\n", x, y);
         x += dx * dt;
         y += dy * dt;

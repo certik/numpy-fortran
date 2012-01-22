@@ -42,12 +42,12 @@ int main()
 
     eq d;
     init(&d);
-    register_func(d, &derivs, &data1);
+    register_func(d, derivs, &data1);
     run(d, 0, 1, 0.1, 10);
     print_material_parameters(d);
 
     printf("\n");
-    register_func(d, &derivs, &data2);
+    register_func(d, derivs, &data2);
     run(d, 0, 1, 0.1, 10);
     print_material_parameters(d);
     destroy(&d);

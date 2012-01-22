@@ -17,6 +17,15 @@ void derivs(double x, double y, double *dx, double *dy, void *data)
     *dy = d->a21 * x + d->a22 * y;
 }
 
+void print_material_parameters(eq *d)
+{
+    // Access the context:
+    my_data *ctx;
+    get_context(d, (void **)(&ctx));
+    printf("Material parameters: %f %f %f %f\n", ctx->a11, ctx->a12,
+            ctx->a21, ctx->a22);
+}
+
 int main()
 {
     my_data data1;
@@ -35,8 +44,11 @@ int main()
     init(&d);
     register_func(&d, &derivs, &data1);
     run(&d, 0, 1, 0.1, 10);
+    print_material_parameters(&d);
+
     printf("\n");
     register_func(&d, &derivs, &data2);
     run(&d, 0, 1, 0.1, 10);
+    print_material_parameters(&d);
     return 0;
 }

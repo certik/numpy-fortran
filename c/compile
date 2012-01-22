@@ -1,6 +1,6 @@
 #! /bin/bash
 
 set -e
-gcc -g -c a.c -o a.o
-gcc -g -c compute.c -o compute.o
-gcc -g -o a a.o compute.o
+gcc --std=c99 -Wall -g -c a.c -o a.o
+gcc --std=c99 -Wall -g -c compute.c -o compute.o
+gcc --std=c99 -Wall -g -o a a.o compute.o

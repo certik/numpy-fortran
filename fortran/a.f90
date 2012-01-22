@@ -3,7 +3,7 @@ use types, only: dp
 use compute, only: init, register_func, run, eq
 
 type(eq) :: d
-character(len=1), allocatable :: data(:)
+integer, allocatable :: data(:)
 
 call init(d)
 call register_func(d, derivs)
@@ -18,7 +18,7 @@ contains
 ! Here the "type" is just an integer, but we can use any type
 subroutine type2data(i, data)
 integer, intent(in) :: i
-character(len=1), allocatable, intent(out) :: data(:)
+integer, allocatable, intent(out) :: data(:)
 integer :: l
 l = size(transfer(i, data))
 allocate(data(l))
@@ -26,7 +26,7 @@ data = transfer(i, data)
 end subroutine
 
 subroutine data2type(data, i)
-character(len=1), intent(in) :: data(:)
+integer, intent(in) :: data(:)
 integer, intent(out) :: i
 i = transfer(data, i)
 end subroutine
@@ -35,7 +35,7 @@ end subroutine
 function derivs(x, data) result(y)
 use types, only: dp
 real(dp), intent(in) :: x(2)
-character(len=1), intent(in) :: data(:)
+integer, intent(in) :: data(:)
 real(dp) :: y(2)
 integer :: eq_type
 call data2type(data, eq_type)

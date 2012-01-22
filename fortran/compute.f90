@@ -9,7 +9,7 @@ abstract interface
     use types, only: dp
     implicit none
     real(dp), intent(in) :: x(2)
-    character(len=1), intent(in) :: data(:)
+    integer, intent(in) :: data(:)
     real(dp) :: y(2)
     end function
 end interface
@@ -36,7 +36,7 @@ subroutine run(d, x0, dt, n_steps, data)
 type(eq), intent(in) :: d
 real(dp), intent(in) :: x0(2), dt
 integer, intent(in) :: n_steps
-character(len=1), intent(in) :: data(:)
+integer, intent(in) :: data(:)
 
 real(dp) :: x(2), dx(2), t
 integer :: i

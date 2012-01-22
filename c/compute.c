@@ -1,25 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "compute.h"
+#include "compute-impl.h"
 
 void init(eq *d)
 {
-    d->func = NULL;
+    *d = malloc(sizeof **d);
+    (*d)->func = NULL;
 }
 
-void register_func(eq *d, derivs_pt func, void *data)
+void register_func(eq d, derivs_pt func, void *data)
 {
     d->func = func;
     d->data = data;
 }
 
-void get_context(eq *d, void **data)
+void get_context(eq d, void **data)
 {
     (*data) = d->data;
 }
 
-void run(eq *d, double x0, double y0, double dt, double n_steps)
+void run(eq d, double x0, double y0, double dt, double n_steps)
 {
     if (d->func == NULL) {
         printf("d.func is NULL\n");
@@ -37,4 +38,10 @@ void run(eq *d, double x0, double y0, double dt, double n_steps)
         y += dy * dt;
         t += dt;
     }
+}
+
+void destroy(eq *d)
+{
+    if (!*d) return;
+    free(*d);
 }

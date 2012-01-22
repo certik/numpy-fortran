@@ -4,5 +4,6 @@ set -e
 FFLAGS="-Wall -Wextra -Wimplicit-interface -fPIC -Werror -fmax-errors=1 -g -fbounds-check -fcheck-array-temporaries -fbacktrace"
 gfortran $FFLAGS -c types.f90 -o types.o
 gfortran $FFLAGS -c compute.f90 -o compute.o
+gfortran $FFLAGS -c my_data_type.f90 -o my_data_type.o
 gfortran $FFLAGS -c a.f90 -o a.o
-gfortran $FFLAGS -o a a.o compute.o
+gfortran $FFLAGS -o a a.o compute.o my_data_type.o types.o

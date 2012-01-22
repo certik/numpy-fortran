@@ -7,6 +7,7 @@ public init, register_func, run, eq
 abstract interface
     function derivs(x, data) result(y)
     use types, only: dp
+    implicit none
     real(dp), intent(in) :: x(2)
     character(len=1), intent(in) :: data(:)
     real(dp) :: y(2)
